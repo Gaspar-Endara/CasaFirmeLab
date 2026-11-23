@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio digital de materiales · Villa El Salvador</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0a0f1a;--s1:#0f1626;--s2:#141d33;--ln:#22304d;--t:#e7ecf4;--m:#8a9ab5;--a:#3ec9b6;--a2:#e8b04b;--ok:#4ade80;--bad:#f87171;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:70px}*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Segoe UI",system-ui,sans-serif;background:radial-gradient(900px 500px at 85% -10%,#3ec9b61f,transparent),radial-gradient(700px 500px at 0 30%,#3b5bdb14,transparent),var(--bg);color:var(--t);overflow-x:clip;line-height:1.5}
+h1,h2,h3,h4,.logo{font-family:Manrope,Inter,system-ui,sans-serif}
+.top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:#0a0f1acc;backdrop-filter:blur(14px);border-bottom:1px solid var(--ln)}
+.logo{font-weight:800;letter-spacing:.02em;display:flex;align-items:center;gap:10px}.logo i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--a),#3b82f6)}
+.top a{color:var(--m);font-size:.85rem;margin-left:22px;text-decoration:none;transition:.2s}.top a:hover{color:var(--a)}
+.wrap{max-width:1160px;margin:auto;padding:0 20px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:64px 0 40px}@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.eb{font:600 .72rem/1 Inter;letter-spacing:.18em;color:var(--a);text-transform:uppercase}
+h1{font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.08;margin:16px 0;font-weight:800;letter-spacing:-.02em}h1 span{color:var(--a)}
+.lead{color:var(--m);max-width:540px;font-size:1.02rem}
+.stats{display:flex;gap:0;margin:28px 0;border:1px solid var(--ln);border-radius:14px;overflow:hidden;background:var(--s1)}.stats div{flex:1;padding:14px 18px;border-right:1px solid var(--ln)}.stats div:last-child{border:0}.stats b{display:block;font:800 1.5rem Manrope;color:var(--t)}.stats small{color:var(--m);font-size:.75rem}
+.btn{font:600 .9rem Inter;color:var(--t);background:var(--s2);border:1px solid var(--ln);padding:11px 22px;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-block;transition:.25s}.btn:hover{border-color:var(--a);transform:translateY(-1px)}
+.pri{background:var(--a);color:#04201c;border-color:transparent}.pri:hover{box-shadow:0 8px 26px #3ec9b655}
+.hv{background:var(--s1);border:1px solid var(--ln);border-radius:20px;padding:18px;box-shadow:0 30px 60px -30px #000}.hv svg{width:100%;display:block}
+.sec{margin:70px 0 26px}.sec h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:10px 0 0;letter-spacing:-.01em}
+.obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.obj>div{background:var(--s1);border:1px solid var(--ln);border-radius:16px;padding:22px;transition:.3s}.obj>div:hover{border-color:var(--a);transform:translateY(-4px)}
+.obj em{font:800 2rem Manrope;color:#2d3d5e;font-style:normal;display:block;margin-bottom:10px;transition:.3s}.obj>div:hover em{color:var(--a)}
+.obj h4{margin:0 0 8px;font-size:1.05rem}.obj p{margin:0;color:var(--m);font-size:.9rem}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.mod{font:inherit;color:var(--t);text-align:left;background:var(--s1);border:1px solid var(--ln);border-radius:14px;padding:16px;cursor:pointer;transition:.25s}.mod b{display:block;font:700 1rem Manrope}.mod small{color:var(--m)}.mod:hover{border-color:#3b4d75}.mod.on{border-color:var(--a);background:linear-gradient(180deg,#3ec9b614,var(--s1))}
+nav{display:flex;gap:4px;margin:22px 0 16px;border-bottom:1px solid var(--ln);flex-wrap:wrap}nav button{font:600 .9rem Inter;color:var(--m);background:none;border:0;border-bottom:2px solid transparent;padding:10px 16px;cursor:pointer;margin-bottom:-1px}nav button.on{color:var(--t);border-color:var(--a)}
+section.tb{display:none;animation:in .5s}section.tb.on{display:block}@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.grid{display:grid;gap:16px;grid-template-columns:300px 1fr}.g2{display:grid;gap:16px;grid-template-columns:1fr 1fr}@media(max-width:860px){.grid,.g2{grid-template-columns:1fr}}
+.card{background:var(--s1);border:1px solid var(--ln);border-radius:16px;padding:16px}.card h3{margin:0 0 10px;font:600 .72rem Inter;letter-spacing:.14em;color:var(--m);text-transform:uppercase}
+canvas{width:100%;height:auto;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.chip{font-size:.78rem;padding:6px 12px;border-radius:8px;border:1px solid var(--ln);cursor:pointer;background:var(--s2);color:var(--m);transition:.2s}.chip:hover{color:var(--t)}.chip.on{border-color:var(--a);color:var(--t);background:#3ec9b61a}
+#fi{background:var(--s2);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;font-size:.86rem;color:var(--m);margin-bottom:12px}#fi b{color:var(--t);font-family:Manrope;font-size:1rem}
+.tg{display:inline-block;font-size:.68rem;font-weight:600;padding:2px 9px;border-radius:99px;margin-left:8px;letter-spacing:.04em}.tg.t{background:#4ade8022;color:var(--ok)}.tg.r{background:#e8b04b22;color:var(--a2)}.tg.i{background:#8a9ab522;color:var(--m)}
+.ro{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:8px;margin:12px 0}.ro div{background:var(--s2);border:1px solid var(--ln);border-radius:10px;padding:9px 10px}.ro small{display:block;color:var(--m);font-size:.68rem;letter-spacing:.04em}.ro b{font:700 1.15rem Manrope}.ro span{color:var(--m);font-size:.72rem}
+.steps{display:flex;gap:6px;margin:10px 0}.steps span{flex:1;text-align:center;font-size:.72rem;padding:7px 2px;border-radius:8px;border:1px solid var(--ln);color:var(--m);transition:.3s}.steps span.on{color:#04201c;background:var(--a);font-weight:700}.steps span.done{color:var(--ok);border-color:#4ade8055}
+#ph{min-height:60px;background:var(--s2);border-left:3px solid var(--a);border-radius:8px;padding:9px 13px;font-size:.9rem}
+#vd{margin-top:10px;padding:10px;border-radius:10px;font-weight:600;background:var(--s2);border:1px solid var(--ln);text-align:center;font-size:.9rem}
+label{display:block;font-size:.84rem;color:var(--m);margin:10px 0 2px}label b{color:var(--t);float:right}input[type=range]{width:100%;accent-color:var(--a)}select{font:inherit;background:var(--s2);color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:6px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}td,th{padding:7px 6px;border-bottom:1px solid var(--ln);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--m);font-weight:500;font-size:.72rem;letter-spacing:.06em}
+.row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.85rem}.row .nm{width:190px;flex:none}.row .bar{flex:1;height:14px;background:var(--s2);border-radius:7px;overflow:hidden}.row .bar i{display:block;height:100%;border-radius:7px;transition:width .9s cubic-bezier(.2,.8,.2,1)}.row .v{width:38px;text-align:right;font-weight:700}
+.big{font:800 2.2rem Manrope;color:var(--a)}.note{color:var(--m);font-size:.78rem;margin-top:10px}
+.gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:12px}.gl div{font-size:.78rem;background:var(--s2);border:1px solid var(--ln);border-radius:10px;padding:9px;color:var(--m)}.gl b{color:var(--a)}
+.src{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}.src p{color:var(--m);font-size:.88rem;margin:6px 0 0}
+footer{margin:50px 0 10px;padding:22px;text-align:center;color:var(--m);font-size:.8rem;border-top:1px solid var(--ln)}
+</style></head><body>
+<div class="top"><div class="logo"><i></i>Lab Materiales VES</div><div><a href="#obj">Objetivos</a><a href="#sim">Laboratorio</a><a href="#src">Fuentes</a></div></div>
+<div class="wrap">
+<div class="hero"><div><span class="eb">Ensayo de tracción + Inteligencia artificial</span>
+<h1>Materiales seguros para construir en <span>Villa El Salvador</span></h1>
+<p class="lead">Un laboratorio digital que combina datos reales de ensayos de tracción con una red neuronal para comparar acero, bambú y plástico reciclado, y decidir con criterio técnico.</p>
+<div class="stats"><div><b>3</b><small>módulos</small></div><div><b>15</b><small>materiales</small></div><div><b>2</b><small>tesis como fuente</small></div></div>
+<a class="btn pri" href="#sim">Abrir el laboratorio</a> <a class="btn" href="#src">Ver fuentes</a></div>
+<div class="hv"><svg viewBox="0 0 360 240"><g stroke="#22304d"><path d="M40 20V200H340M40 160H340M40 120H340M40 80H340M40 40H340M120 20V200M200 20V200M280 20V200"/></g><path id="cv" d="M40 200L100 70Q130 38 175 44Q230 52 262 110L300 200" fill="none" stroke="#3ec9b6" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"><animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;.55;.9;1" dur="5s" repeatCount="indefinite"/></path><path d="M40 200L140 120Q200 90 330 150" fill="none" stroke="#8a9ab5" stroke-width="2" stroke-dasharray="5 5" opacity=".6"/><circle r="6" fill="#e8b04b"><animateMotion dur="5s" repeatCount="indefinite" keyPoints="0;1;1;0" keyTimes="0;.55;.9;1" calcMode="linear"><mpath href="#cv"/></animateMotion></circle><text x="46" y="16" fill="#8a9ab5" font-size="11">σ (MPa)</text><text x="300" y="218" fill="#8a9ab5" font-size="11">ε (%)</text><text x="180" y="36" fill="#e8b04b" font-size="11">σ máx</text></svg></div></div>
+
+<div class="sec" id="obj"><span class="eb">01 · Objetivos</span><h2>Lo que buscamos lograr</h2></div>
+<div class="obj">
+<div class="rv"><em>01</em><h4>Innovación con propósito social</h4><p>Desarrollar soluciones tecnológicas que resuelvan problemáticas reales en Villa El Salvador, alineadas a los ODS.</p></div>
+<div class="rv" style="transition-delay:.1s"><em>02</em><h4>Equipos multidisciplinarios</h4><p>Integrar ingeniería de materiales, datos, UX y ciencias sociales para abordar retos complejos.</p></div>
+<div class="rv" style="transition-delay:.2s"><em>03</em><h4>IA y tecnologías emergentes</h4><p>Aplicar redes neuronales a ensayos de tracción para predecir y recomendar materiales seguros y económicos.</p></div>
+<div class="rv" style="transition-delay:.3s"><em>04</em><h4>Prototipos con impacto real</h4><p>Generar herramientas funcionales con potencial de uso comunitario y escalabilidad en Lima Sur.</p></div></div>
+
+<div class="sec" id="sim"><span class="eb">02 · Laboratorio</span><h2>Elige un módulo y ensaya</h2></div>
+<div class="mods" id="mods"></div>
+<nav id="tabs"><button class="on" data-t="0">Ensayo de tracción</button><button data-t="1">Inteligencia artificial</button><button data-t="2">Selección de material</button></nav>
+
+<section class="tb on" id="t0"><div class="grid">
+<div class="card"><h3>Probeta en la máquina</h3><canvas id="spec" width="300" height="430"></canvas></div>
+<div><div class="card"><h3>Material</h3><div class="chips" id="chips"></div><div id="fi"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" id="go">▶ Iniciar ensayo</button><button class="btn" id="rs">↺ Reiniciar</button><label style="margin:0">Velocidad <input type="range" id="sp" min=".4" max="3" step=".1" value="1" style="width:100px"></label><label style="margin:0"><input type="checkbox" id="ref" checked> comparar con referencia</label></div>
+<div class="steps" id="steps"><span>Elástica</span><span>Fluencia</span><span>Estricción</span><span>Fractura</span></div><div id="ph"></div>
+<div class="ro"><div><small>ESFUERZO σ</small><b id="r1">0</b> <span>MPa</span></div><div><small>DEFORMACIÓN ε</small><b id="r2">0</b> <span>%</span></div><div><small>MÓDULO E</small><b id="r3">0</b> <span>GPa</span></div><div><small>RESIST. ÚLTIMA</small><b id="r4">—</b> <span>MPa</span></div><div><small>σ / ρ</small><b id="r5">0</b></div></div><div id="vd"></div></div>
+<div class="card" style="margin-top:16px"><h3>Curva esfuerzo–deformación</h3><canvas id="chart" width="620" height="380"></canvas>
+<div class="gl"><div><b>Línea punteada</b> curva completa esperada.</div><div><b>Banda ámbar</b> rango teórico (ASTM) cuando existe.</div><div><b>Barra</b> desviación estándar medida en la tesis.</div><div><b>Línea verde</b> meta mínima de referencia.</div></div></div></div></div></section>
+
+<section class="tb" id="t1"><div class="g2">
+<div class="card"><h3>Red neuronal entrenando</h3><canvas id="net" width="360" height="250"></canvas><canvas id="loss" width="360" height="130"></canvas>
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="note" id="ep"></span><button class="btn pri" id="rt">↺ Reentrenar</button></div>
+<p class="note">Entradas: densidad ρ, módulo E, deformación a rotura ε y tipo de material. Salida: resistencia última σ. Aprende de 15 materiales con variaciones de ±5 %. Es una demostración del método: con tan pocos datos no sustituye ensayos nuevos.</p></div>
+<div><div class="card"><h3>Prueba un material nuevo</h3>
+<label>Tipo <select id="s5"><option value="0">Acero / metal</option><option value="1">Fibra natural</option><option value="2">Plástico reciclado</option></select></label>
+<label>Densidad ρ (g/cm³) <b id="v1"></b></label><input type="range" id="s1" min=".3" max="8" step=".05" value="1">
+<label>Módulo E (GPa) <b id="v2"></b></label><input type="range" id="s2" min=".5" max="250" step=".5" value="10">
+<label>Deformación a rotura ε (%) <b id="v3"></b></label><input type="range" id="s3" min=".5" max="100" step=".5" value="3">
+<div style="margin-top:12px"><span class="big" id="pr">—</span> MPa predichos<div id="pv" class="note" style="font-size:.9rem"></div></div></div>
+<div class="card" style="margin-top:16px"><h3>Real vs predicción</h3><table id="tb"></table></div></div></div></section>
+
+<section class="tb" id="t2"><div class="g2">
+<div class="card"><h3>Prioridades de tu obra</h3>
+<label>Resistencia por peso (σ/ρ) <b id="w1v"></b></label><input type="range" id="w1" min="0" max="10" value="5">
+<label>Rigidez por peso (E/ρ) <b id="w2v"></b></label><input type="range" id="w2" min="0" max="10" value="2">
+<label>Absorción de energía (tenacidad/ρ) <b id="w3v"></b></label><input type="range" id="w3" min="0" max="10" value="3">
+<label>Economía (costo bajo) <b id="w4v"></b></label><input type="range" id="w4" min="0" max="10" value="5">
+<p class="note">Los materiales que no llegan a la meta de resistencia se penalizan (⚠). Metas de referencia: acero 400 MPa (mínimo ASTM A-36), fibras 150 MPa y plástico 30 MPa (estas dos son ilustrativas). Los costos relativos (1 a 5) son estimados: reemplázalos por precios de VES. No se evalúan fatiga, humedad ni durabilidad. La densidad de la guadua (0,7 g/cm³) es de referencia y debe verificarse.</p></div>
+<div class="card"><h3>Ranking del módulo</h3><div id="rk" style="display:flex;flex-direction:column"></div></div></div></section>
+
+<div class="sec" id="src"><span class="eb">03 · Fuentes</span><h2>Datos de laboratorio reales</h2></div>
+<div class="src"><div class="card"><h3>Metales</h3><b>Diseño y fabricación de una máquina didáctica para ensayos de tracción</b><p>L. Ortiz y C. Rosas. Universidad Católica de Santa María, Arequipa (ensayos de agosto y septiembre de 2021). Acero A-36, acero inoxidable AISI 316 y aluminio 6061-T4, 3 probetas cada uno, norma ASTM E8/E8M.</p></div>
+<div class="card"><h3>Bambú</h3><b>Comportamiento a tracción del bambú Guadua angustifolia teniendo en cuenta el deslizamiento en la interfaz fibra–matriz</b><p>Willington Padilla Martínez. Universidad Nacional de Colombia, 2018. 12 probetas de guadua laminada; modelo de plasticidad con distribución de Weibull.</p></div></div>
+<footer>Laboratorio digital de materiales · Villa El Salvador · Los valores marcados como referencia o ilustrativos no provienen de las tesis</footer></div>
+<script>
+const $=id=>document.getElementById(id),PAL=['#3ec9b6','#e8b04b','#a78bfa','#60a5fa','#f472b6','#34d399','#fb923c','#38bdf8','#c084fc','#fbbf24','#2dd4bf','#f87171','#818cf8','#a3e635','#94a3b8'];
+const MN=[['Acero y metales','Datos de tesis · UCSM Arequipa'],['Fibras naturales','Guadua · tesis UNAL Colombia'],['Plástico reciclado','PET, HDPE, PP y PVC (referencia)']],TH=[400,150,30];
+/* modelo de la tesis UNAL (Estrada 2016 + friccion) */
+const R=x=>{const u=24.1575*x;return u*Math.exp(-Math.pow(u/678.56,1.3236))},F=x=>25*Math.atan(.28*x-8)+36;
+const mk=(f,s)=>{let m=0;for(let i=0;i<=400;i++)m=Math.max(m,f(i*.25));return x=>f(x)*s/m};
+const G=[['Guadua · deslizamiento de fibras',198,59,100,23,0,x=>R(x)+F(x),'5 probetas (P2, P6, P9, P10, P11). Las fibras se extraen de la matriz de lignina y queda un esfuerzo residual por fricción: el material no cae a cero. Curva construida con el modelo de la tesis, escalada al máximo promedio medido.'],['Guadua · rotura frágil',145,57,16,14,1,x=>x<=14?R(x):R(14)*Math.max(0,1-(x-14)/2),'4 probetas con sección reducida menor a 1 mm: las fibras se dañan al mecanizar y rompen de golpe con menos resistencia. Lección: el espesor y la preparación de la probeta importan.'],['Guadua · cortante paralelo',208,24,80,23,0,x=>(R(x)+F(x))*(x<=23?1:Math.max(0,1-(x-23)/57)),'3 probetas (P3, P5, P12). Se pierde la adherencia fibra–matriz en un plano y la resistencia cae hasta cero. Es el resultado más consistente (desviación de 24 MPa).']];
+const M=[{n:'Acero A-36',o:0,d:7.85,E:200,s:527,y:250,e:33,k:2,t:'t',band:[400,550],note:'Promedio de 3 probetas: 523 a 529 MPa y alargamiento de 30 a 36 %. La tesis no midió fluencia: se usa el mínimo ASTM como referencia.'},
+{n:'Acero inoxidable AISI 316',o:0,d:8,E:193,s:686,y:205,e:34,k:5,t:'t',band:[515,700],note:'Las 3 probetas dieron 685,79 MPa: la carga se obtiene de la presión del manómetro, con resolución limitada. Fluencia de referencia ASTM.'},
+{n:'Aluminio 6061-T4',o:0,d:2.7,E:68.9,s:235,y:145,e:17,k:3,t:'t',note:'Promedio de 3 probetas (235,58 MPa) y alargamiento de 16 a 18 %. Fluencia típica de referencia.'},
+{n:'Varilla Grado 60 (ref.)',o:0,d:7.85,E:200,s:650,y:440,e:12,k:4,t:'r',note:'Valor de referencia. La norma ASTM A615 Gr. 60 pide cerca de 620 MPa mínimo; verificar la NTP vigente.'},
+{n:'Varilla informal (ilustrativa)',o:0,d:7.85,E:195,s:360,y:240,e:6,k:2,t:'i',note:'Ejemplo ilustrativo de una varilla sin certificar. No es un dato medido.'},
+...G.map(g=>({n:g[0],o:1,d:.7,E:2.416,s:g[1],y:0,e:g[3],eu:g[4],ey:10,br:!!g[5],sd:g[2],k:1,t:'t',fr:g[0].includes('desliz'),f:mk(g[6],g[1]),note:g[7]})),
+{n:'Cabuya (sisal) (ref.)',o:1,d:1.45,E:15,s:500,y:500,e:0,k:2,t:'r',note:'Fibra individual: no comparable con una lámina o un haz embebido en matriz.'},
+{n:'Yute (ref.)',o:1,d:1.3,E:26,s:450,y:450,e:0,k:3,t:'r',note:'Valor de referencia de fibra individual.'},
+{n:'Fibra de coco (ref.)',o:1,d:1.2,E:5,s:175,y:175,e:0,k:1,t:'r',note:'Valor de referencia de fibra individual.'},
+{n:'PET reciclado (ref.)',o:2,d:1.35,E:2.7,s:60,y:55,e:12,k:2,t:'r',note:'Valor de referencia. El plástico reciclado varía mucho según el lote.'},
+{n:'HDPE reciclado (ref.)',o:2,d:.95,E:.9,s:28,y:22,e:40,k:1,t:'r',note:'Valor de referencia.'},{n:'PP reciclado (ref.)',o:2,d:.91,E:1.3,s:32,y:28,e:30,k:1,t:'r',note:'Valor de referencia.'},{n:'PVC reciclado (ref.)',o:2,d:1.4,E:3,s:50,y:45,e:25,k:2,t:'r',note:'Valor de referencia.'}].map((m,i)=>{m.c=PAL[i%15];if(m.ey===undefined){m.br=m.y>=m.s;if(m.br)m.e=m.s/(10*m.E)*100;m.ey=m.y/(10*m.E)*100;m.eu=m.br?m.e:m.e*.8}m.ok=m.s>=TH[m.o];return m});
+function sig(m,x){if(m.f)return m.f(x);if(x<=m.ey)return 10*m.E*x;if(x<=m.eu)return m.y+(m.s-m.y)*Math.sqrt((x-m.ey)/(m.eu-m.ey));const r=(x-m.eu)/(m.e-m.eu);return m.s*(1-.3*r*r)}
+M.forEach(m=>{let a=0;for(let i=0;i<200;i++)a+=sig(m,m.e*(i+.5)/200)*m.e/200/100;m.tg=a});
+let MOD=0;const MS=()=>M.filter(m=>m.o==MOD),S={i:0,eps:0,run:false,br:false,sp:1,P:[]};
+const PH=["Zona elástica: el material se estira y recupera su forma. Esfuerzo y deformación son proporcionales y la pendiente es E.","Fluencia y endurecimiento: la deformación ya es permanente y el material sigue resistiendo hasta su máximo.","Estricción o deslizamiento: la probeta se afina o las fibras salen de la matriz, y la fuerza empieza a bajar.","Fractura: ya tenemos la resistencia última. Compárala con la meta verde para saber si es segura."],BRP="Material frágil: se comporta elástico casi hasta romper y falla de golpe.";
+$('mods').innerHTML=MN.map((a,i)=>`<button class="mod" data-m="${i}"><b>${a[0]}</b><small>${a[1]}</small></button>`).join('');
+const TG={t:'Dato de tesis',r:'Referencia',i:'Ilustrativo'};
+function setMod(k){MOD=k;document.querySelectorAll('.mod').forEach((b,i)=>b.classList.toggle('on',i==k));$('chips').innerHTML=MS().map(m=>`<span class="chip" data-i="${M.indexOf(m)}">${m.n}</span>`).join('');pick(M.indexOf(MS()[0]));buildRk();rank();mlUI()}
+$('mods').onclick=e=>{const b=e.target.closest('.mod');if(b)setMod(+b.dataset.m)};
+function pick(i){S.i=i;rst();const m=M[i];document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',+c.dataset.i==i));$('fi').innerHTML=`<b>${m.n}</b><span class="tg ${m.t}">${TG[m.t]}</span><br>ρ ${m.d} g/cm³ · E ${m.E} GPa${m.sd?` · σ máx ${m.s} ± ${m.sd} MPa`:''}<br>${m.note}`}
+function rst(){S.eps=0;S.br=false;S.run=false;S.P=[];$('go').textContent='▶ Iniciar ensayo'}
+$('chips').onclick=e=>{if(e.target.dataset.i)pick(+e.target.dataset.i)};
+$('go').onclick=()=>{if(S.br)rst();S.run=!S.run;$('go').textContent=S.run?'⏸ Pausar':'▶ Continuar'};$('rs').onclick=rst;$('sp').oninput=e=>S.sp=+e.target.value;
+const sx=$('spec').getContext('2d');
+function drawSpec(m){const top=70,k=S.eps/m.e,L=200*(1+k*(m.br?.3:.6)),e=S.eps;sx.clearRect(0,0,300,430);
+const r=Math.min(1,sig(m,e)/m.s),col=`hsl(${185-160*r},78%,58%)`,dy=S.br?16:0;
+const hw=t=>{const b=18*(1-.18*k),n=(!m.br&&e>m.eu)?(m.fr?5:11)*Math.exp(-(((t-.5)/.09)**2))*Math.min(1,(e-m.eu)/(m.e-m.eu)):0;return b-n};
+const poly=(a,b,d)=>{sx.beginPath();for(let t=a;t<=b+1e-6;t+=.02)sx.lineTo(150-hw(t),top+t*L+d);for(let t=b;t>=a-1e-6;t-=.02)sx.lineTo(150+hw(t),top+t*L+d);sx.closePath();sx.fill()};
+sx.save();sx.fillStyle=col;sx.shadowColor=col;sx.shadowBlur=8+10*r;if(S.br){poly(0,.5,0);poly(.5,1,dy)}else poly(0,1,0);sx.restore();
+if(m.fr&&e>m.eu){sx.strokeStyle='#e7ecf4aa';sx.lineWidth=1;for(let i=0;i<10;i++){const x=141+i*2;sx.beginPath();sx.moveTo(x,top+L*.4);sx.quadraticCurveTo(x+Math.sin(i*2+e)*6,top+L*.5,x,top+L*.6);sx.stroke()}}
+const gr=(y,h)=>{const g=sx.createLinearGradient(100,0,200,0);g.addColorStop(0,'#3b4660');g.addColorStop(.5,'#9fb0cc');g.addColorStop(1,'#3b4660');sx.fillStyle=g;sx.fillRect(100,y,100,h)};gr(top-40,40);gr(top+L+dy,40);
+if(S.run){sx.fillStyle='#e8b04b';[[top-48,-1],[top+L+dy+48,1]].forEach(([y,d])=>{sx.globalAlpha=.4+.6*r;sx.beginPath();sx.moveTo(150,y+d*14);sx.lineTo(138,y);sx.lineTo(162,y);sx.fill()});sx.globalAlpha=1}
+S.P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.l-=.02;sx.fillStyle=`rgba(232,176,75,${Math.max(0,p.l)})`;sx.fillRect(p.x,p.y,3,3)});S.P=S.P.filter(p=>p.l>0)}
+const cx=$('chart').getContext('2d'),nice=v=>{const p=Math.pow(10,Math.floor(Math.log10(v)))/2;return Math.ceil(v/p)*p};
+function drawChart(m,T){const W=620,H=380,l=60,r=20,t=20,b=44,REF=MS()[0];cx.clearRect(0,0,W,H);
+const xm=nice(m.e*1.2),ym=nice(Math.max(m.s*1.25,TH[MOD]*1.15,m.band?m.band[1]*1.08:0)),X=v=>l+(W-l-r)*v/xm,Y=v=>H-b-(H-t-b)*v/ym;
+cx.font='12px Inter,sans-serif';cx.fillStyle='#8a9ab5';cx.strokeStyle='#22304d';cx.lineWidth=1;
+if(m.band){cx.fillStyle='#e8b04b1f';cx.fillRect(l,Y(m.band[1]),W-l-r,Y(m.band[0])-Y(m.band[1]));cx.fillStyle='#e8b04b';cx.textAlign='left';cx.fillText('Rango teórico ASTM '+m.band[0]+'–'+m.band[1],l+8,Y(m.band[1])+14);cx.fillStyle='#8a9ab5'}
+for(let i=0;i<=5;i++){const y=Y(ym*i/5),x=X(xm*i/5);cx.beginPath();cx.moveTo(l,y);cx.lineTo(W-r,y);cx.moveTo(x,t);cx.lineTo(x,H-b);cx.stroke();cx.textAlign='right';cx.fillText(+(ym*i/5).toPrecision(3),l-6,y+4);cx.textAlign='center';cx.fillText(+(xm*i/5).toPrecision(2),x,H-b+16)}
+cx.fillText('ε (%)',W/2,H-6);cx.save();cx.translate(14,H/2);cx.rotate(-Math.PI/2);cx.fillText('σ (MPa)',0,0);cx.restore();
+cx.setLineDash([8,5]);cx.strokeStyle='#4ade80';cx.lineWidth=1.5;cx.beginPath();cx.moveTo(l,Y(TH[MOD]));cx.lineTo(W-r,Y(TH[MOD]));cx.stroke();cx.fillStyle='#4ade80';cx.textAlign='right';cx.fillText('Meta '+TH[MOD]+' MPa',W-r-4,Y(TH[MOD])-6);
+if($('ref').checked&&m!==REF){cx.strokeStyle='#94a3b8';cx.lineWidth=1.5;cx.beginPath();for(let x=0;x<=Math.min(REF.e,xm);x+=xm/300)cx.lineTo(X(x),Y(sig(REF,x)));cx.stroke();cx.fillStyle='#94a3b8';cx.textAlign='left';cx.fillText('Referencia',X(Math.min(REF.e,xm))*.5+l*.5,Y(sig(REF,REF.eu))-8)}
+cx.strokeStyle=m.c+'88';cx.lineWidth=2;cx.setLineDash([3,5]);cx.beginPath();for(let x=0;x<=m.e;x+=m.e/300)cx.lineTo(X(x),Y(sig(m,x)));cx.lineTo(X(m.e),Y(sig(m,m.e)));cx.stroke();cx.setLineDash([]);
+if(m.sd){cx.strokeStyle='#e8b04b';cx.lineWidth=2;const px=X(m.eu);cx.beginPath();cx.moveTo(px,Y(m.s-m.sd));cx.lineTo(px,Y(m.s+m.sd));cx.moveTo(px-5,Y(m.s-m.sd));cx.lineTo(px+5,Y(m.s-m.sd));cx.moveTo(px-5,Y(m.s+m.sd));cx.lineTo(px+5,Y(m.s+m.sd));cx.stroke();cx.fillStyle='#e8b04b';cx.textAlign='left';cx.fillText('± '+m.sd,px+9,Y(m.s)+4)}
+const path=()=>{cx.beginPath();cx.moveTo(X(0),Y(0));for(let x=0;x<=S.eps;x+=xm/300)cx.lineTo(X(x),Y(sig(m,x)));cx.lineTo(X(S.eps),Y(sig(m,S.eps)))};
+path();cx.lineTo(X(S.eps),Y(0));const g=cx.createLinearGradient(0,t,0,H-b);g.addColorStop(0,m.c+'44');g.addColorStop(1,m.c+'00');cx.fillStyle=g;cx.fill();
+path();cx.strokeStyle=m.c;cx.lineWidth=3;cx.stroke();
+const px=X(S.eps),py=Y(sig(m,S.eps));cx.fillStyle='#fff';cx.beginPath();cx.arc(px,py,S.br?6:5+2*Math.sin(T/150),0,7);cx.fill();
+if(S.br){cx.fillStyle='#f87171';cx.textAlign='center';cx.fillText('✖ rotura',px,py+22)}cx.lineWidth=1}
+function upd(m){if(S.run&&!S.br){S.eps+=m.e/360*S.sp;if(S.eps>=m.e){S.eps=m.e;S.br=true;S.run=false;$('go').textContent='▶ Repetir';for(let k=0;k<40;k++)S.P.push({x:150,y:170+Math.random()*20,vx:(Math.random()-.5)*7,vy:-Math.random()*4,l:1})}}
+const ph=S.br?3:S.eps<=m.ey?0:S.eps<=m.eu?1:2;$('ph').textContent=m.br&&!S.br?BRP:PH[ph];
+document.querySelectorAll('#steps span').forEach((s,i)=>{s.className=i==ph?'on':i<ph?'done':''});
+$('r1').textContent=sig(m,S.eps).toFixed(0);$('r2').textContent=S.eps.toFixed(1);$('r3').textContent=m.E;$('r4').textContent=S.br||S.eps>=m.eu?m.s:'—';$('r5').textContent=(m.s/m.d).toFixed(0);
+const v=$('vd');if(S.br){v.textContent=m.ok?`Cumple la meta de ${TH[m.o]} MPa`:`No cumple la meta de ${TH[m.o]} MPa: no recomendado para uso estructural`;v.style.color=m.ok?'#4ade80':'#f87171'}else{v.textContent='Ensayo en curso…';v.style.color='#8a9ab5'}}
+/* ML */
+const H=8,I=5;let W1,b1,W2,b2,D,mu,sd,tm,ts,ep,LS=[],act=[];
+const nr=()=>{let u=0;for(let i=0;i<6;i++)u+=Math.random();return(u-3)/Math.sqrt(.5)},ft=(d,E,e,o)=>[Math.log(d),Math.log(E),Math.log(e),o==1?1:0,o==2?1:0];
+function init(){D=[];M.forEach(m=>{for(let k=0;k<26;k++){const n=()=>Math.exp(.05*nr());D.push({x:ft(m.d*n(),m.E*n(),m.e*n(),m.o),t:Math.log(m.s*n())})}});
+mu=[0,1,2,3,4].map(i=>D.reduce((a,d)=>a+d.x[i],0)/D.length);sd=[0,1,2,3,4].map(i=>Math.sqrt(D.reduce((a,d)=>a+(d.x[i]-mu[i])**2,0)/D.length)||1);
+tm=D.reduce((a,d)=>a+d.t,0)/D.length;ts=Math.sqrt(D.reduce((a,d)=>a+(d.t-tm)**2,0)/D.length);D.forEach(d=>{d.n=d.x.map((v,i)=>(v-mu[i])/sd[i]);d.y=(d.t-tm)/ts});
+W1=[...Array(H)].map(()=>[...Array(I)].map(()=>Math.random()-.5));b1=Array(H).fill(0);W2=[...Array(H)].map(()=>Math.random()-.5);b2=0;ep=0;LS=[];act=Array(H).fill(0)}
+function fw(x){const h=W1.map((w,j)=>Math.tanh(w.reduce((a,v,i)=>a+v*x[i],b1[j])));return[h,h.reduce((a,v,j)=>a+v*W2[j],b2)]}
+const pred=(d,E,e,o)=>Math.exp(fw(ft(d,E,e,o).map((v,i)=>(v-mu[i])/sd[i]))[1]*ts+tm);
+function epoch(){let L=0;const lr=.01;for(let k=0;k<D.length;k++){const s=D[Math.random()*D.length|0],[h,y]=fw(s.n),er=y-s.y;L+=er*er;act=h;for(let j=0;j<H;j++){const dh=er*W2[j]*(1-h[j]*h[j]);W2[j]-=lr*er*h[j];b1[j]-=lr*dh;for(let i=0;i<I;i++)W1[j][i]-=lr*dh*s.n[i]}b2-=lr*er}ep++;LS.push(L/D.length)}
+const nx=$('net').getContext('2d'),lx=$('loss').getContext('2d');
+function drawNet(T){nx.clearRect(0,0,360,250);const L=[5,8,1],xs=[50,180,310],P=(l,i)=>[xs[l],250/(L[l]+1)*(i+1)];
+const ed=(a,b,w)=>{const al=Math.min(.9,Math.abs(w)*.4+.06);nx.strokeStyle=w>0?`rgba(62,201,182,${al})`:`rgba(232,176,75,${al})`;nx.lineWidth=.5+Math.abs(w)*1.1;nx.setLineDash([4,6]);nx.lineDashOffset=-T*.03;nx.beginPath();nx.moveTo(...a);nx.lineTo(...b);nx.stroke()};
+for(let j=0;j<H;j++){for(let i=0;i<I;i++)ed(P(0,i),P(1,j),W1[j][i]);ed(P(1,j),P(2,0),W2[j])}nx.setLineDash([]);
+L.forEach((n,l)=>{for(let i=0;i<n;i++){const[x,y]=P(l,i),a=l==1?Math.abs(act[i]):.6;nx.fillStyle=`rgba(62,201,182,${.25+.7*a})`;nx.beginPath();nx.arc(x,y,8+1.5*Math.sin(T/300+i+l),0,7);nx.fill()}});
+nx.fillStyle='#8a9ab5';nx.font='11px Inter,sans-serif';nx.textAlign='center';['ρ','E','ε','fibra','plást.'].forEach((s,i)=>nx.fillText(s,22,P(0,i)[1]+4));nx.fillText('σ',340,129)}
+function drawLoss(){lx.clearRect(0,0,360,130);if(LS.length<2)return;const mx=Math.max(...LS.slice(0,40)),n=LS.length;lx.strokeStyle='#e8b04b';lx.lineWidth=2;lx.beginPath();LS.forEach((v,i)=>lx.lineTo(10+340*i/(n-1),120-110*Math.min(1,v/mx)));lx.stroke();lx.fillStyle='#8a9ab5';lx.font='11px Inter,sans-serif';lx.fillText('error al entrenar ↓',12,14)}
+function mlUI(){if(!LS.length)return;$('ep').textContent='Época '+ep+' · error '+LS[LS.length-1].toFixed(4);
+$('tb').innerHTML='<tr><th>MATERIAL</th><th>σ REAL</th><th>σ ML</th><th>ERROR</th></tr>'+MS().map(m=>{const p=pred(m.d,m.E,m.e,m.o),er=(p/m.s-1)*100;return`<tr><td>${m.n}</td><td>${m.s}</td><td>${p.toFixed(0)}</td><td style="color:${Math.abs(er)<8?'#4ade80':'#e8b04b'}">${er>0?'+':''}${er.toFixed(1)}%</td></tr>`}).join('');cust()}
+function cust(){const d=+$('s1').value,E=+$('s2').value,e=+$('s3').value,o=+$('s5').value;$('v1').textContent=d;$('v2').textContent=E;$('v3').textContent=e;const p=pred(d,E,e,o),ok=p>=TH[o];$('pr').textContent=p.toFixed(0);
+$('pv').innerHTML=`Resistencia por peso: <b>${(p/d).toFixed(0)}</b> · <span style="color:${ok?'#4ade80':'#f87171'}">${ok?'supera':'no llega a'} la meta de ${TH[o]} MPa</span>`}
+['s1','s2','s3','s5'].forEach(i=>$(i).oninput=cust);$('rt').onclick=init;
+/* selector */
+function buildRk(){$('rk').innerHTML=MS().map(m=>{const i=M.indexOf(m);return`<div class="row" id="rw${i}"><span class="nm">${m.n}</span><span class="bar"><i style="background:${m.c};width:0"></i></span><span class="v">0</span></div>`}).join('')}
+function rank(){const w=[1,2,3,4].map(i=>+$('w'+i).value);[1,2,3,4].forEach(i=>$('w'+i+'v').textContent=w[i-1]);const ms=MS(),f=ms.map(m=>[m.s/m.d,m.E/m.d,m.tg/m.d,1/m.k]),mx=[0,1,2,3].map(k=>Math.max(...f.map(a=>a[k]))),sm=w.reduce((a,b)=>a+b,0)||1;
+const sc=f.map((a,j)=>a.reduce((s,v,k)=>s+w[k]*v/mx[k],0)/sm*100*(ms[j].ok?1:.35)),od=sc.map((v,j)=>[v,j]).sort((a,b)=>b[0]-a[0]);
+od.forEach(([v,j],pos)=>{const m=ms[j],r=$('rw'+M.indexOf(m));if(!r)return;r.style.order=pos;r.querySelector('i').style.width=v+'%';r.querySelector('.v').textContent=v.toFixed(0);r.querySelector('.nm').textContent=(pos==0&&m.ok?'★ ':'')+(m.ok?'':'⚠ ')+m.n})}
+['w1','w2','w3','w4'].forEach(i=>$(i).oninput=rank);
+$('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('section.tb').forEach((s,i)=>s.classList.toggle('on',i==+b.dataset.t));if(b.dataset.t==2){buildRk();setTimeout(rank,60)}};
+const io='IntersectionObserver'in window?new IntersectionObserver(a=>a.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.2}):null;document.querySelectorAll('.rv').forEach(e=>io?io.observe(e):e.classList.add('in'));
+init();setMod(0);let fr=0;
+function loop(T){const m=M[S.i];upd(m);drawSpec(m);drawChart(m,T);if(ep<1500)for(let k=0;k<8;k++)epoch();drawNet(T);drawLoss();if(fr++%12==0)mlUI();requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+</script></body></html>
