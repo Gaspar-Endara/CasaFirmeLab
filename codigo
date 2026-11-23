@@ -1,1 +1,166 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa Firme Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1a;--s1:#0f1626;--s2:#141d33;--ln:#22304d;--t:#e7ecf4;--m:#8a9ab5;--a:#3ec9b6;--a2:#e8b04b;--ok:#4ade80;--bad:#f87171;--ab:#04201c;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1f4f8;--s1:#fff;--s2:#eef2f7;--ln:#d5dce6;--t:#16202c;--m:#5b6b80;--a:#0f9b8a;--a2:#b7791f;--ok:#15803d;--bad:#b91c1c;--ab:#fff;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f1f4f8;--s1:#fff;--s2:#eef2f7;--ln:#d5dce6;--t:#16202c;--m:#5b6b80;--a:#0f9b8a;--a2:#b7791f;--ok:#15803d;--bad:#b91c1c;--ab:#fff;color-scheme:light}
+*{box-sizing:border-box}html{scroll-padding-top:64px}
+body{margin:0;font:15px/1.5 Inter,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--t);overflow-x:clip}
+h1,h3,.logo,b{font-family:Manrope,Inter,system-ui,sans-serif}
+.top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 24px;background:var(--bg);border-bottom:1px solid var(--ln)}
+.logo{font-weight:800;display:flex;align-items:center;gap:10px;font-size:18px}.logo i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--a),#3b82f6)}
+nav{display:flex;gap:4px}nav button{font:600 14px Inter;color:var(--m);background:none;border:0;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer}nav button.on{color:var(--t);border-color:var(--a)}
+.wrap{max-width:1160px;margin:auto;padding:0 20px 40px}
+.hero{padding:34px 0 10px}h1{font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.1;margin:8px 0;letter-spacing:-.02em}h1 span{color:var(--a)}.lead{color:var(--m);max-width:62ch;margin:0}
+.eb{font:600 12px Inter;letter-spacing:.14em;color:var(--a)}
+.tb{display:none;margin-top:18px}.tb.on{display:block}
+.g2{display:grid;gap:16px;grid-template-columns:1fr 1fr}.grid{display:grid;gap:16px;grid-template-columns:260px 1fr}
+@media(max-width:860px){.g2,.grid{grid-template-columns:1fr}}
+.card{background:var(--s1);border:1px solid var(--ln);border-radius:16px;padding:18px;min-width:0;margin-bottom:16px}
+.card h3{margin:0 0 10px;font-size:13px;color:var(--m)}
+.nb{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--a);color:var(--ab);font:800 12px Manrope;margin-right:9px}
+canvas{width:100%;display:block}
+label{display:block;font-size:13px;color:var(--m);margin:10px 0 3px}label b{float:right;color:var(--t)}
+input[type=number],select{width:100%;font:inherit;background:var(--s2);color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:8px 10px}
+input[type=range]{width:100%;accent-color:var(--a)}input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{font:600 14px Inter;color:var(--t);background:var(--s2);border:1px solid var(--ln);padding:10px 18px;border-radius:10px;cursor:pointer}.btn:hover{border-color:var(--a)}.pri{background:var(--a);color:var(--ab);border-color:transparent}
+.bt{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.v{margin-top:8px;padding:12px;border-radius:10px;font-weight:600;background:var(--s2);border:1px solid var(--ln);text-align:center}
+.ro{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:10px 0}.ro div{background:var(--s2);border:1px solid var(--ln);border-radius:10px;padding:8px 10px}.ro small{display:block;color:var(--m);font-size:11px}.ro b{font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.chip{font-size:13px;padding:6px 11px;border-radius:8px;border:1px solid var(--ln);cursor:pointer;background:var(--s2);color:var(--m)}.chip.on{border-color:var(--a);color:var(--t)}
+.steps{display:flex;gap:6px;margin:10px 0}.steps span{flex:1;text-align:center;font-size:12px;padding:6px 2px;border-radius:8px;border:1px solid var(--ln);color:var(--m)}.steps span.on{background:var(--a);color:var(--ab);font-weight:700}
+.row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px}.row .nm{width:170px;flex:none}.bar{flex:1;height:14px;background:var(--s2);border-radius:7px;position:relative}.bar i{display:block;height:100%;border-radius:7px}.bar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--a2)}.row .vl{width:56px;text-align:right;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px 6px;border-bottom:1px solid var(--ln);text-align:right}td:first-child,th:first-child{text-align:left}th{color:var(--m);font-weight:500}td input{width:70px;padding:4px 6px}
+.rc{padding:10px 12px;border-left:3px solid var(--a);background:var(--s2);border-radius:8px;margin:8px 0;font-size:14px}.rc.bad{border-color:var(--bad)}
+.note{color:var(--m);font-size:12px}.ok{color:var(--ok)}.no{color:var(--bad)}.wn{color:var(--a2)}
+</style></head><body>
+<div class="top"><div class="logo"><i></i>Casa Firme Lab</div>
+<nav id="tabs"><button class="on" data-t="1">Sismo M8,5 · Tu material</button><button data-t="0">Ensayo de tracción</button></nav></div>
+<div class="wrap">
+<div class="hero"><span class="eb">ENSAYO DE TRACCIÓN + SIMULACIÓN SÍSMICA</span>
+<h1>¿Resiste tu material un sismo de <span>magnitud 8,5</span>?</h1>
+<p class="lead">Elige el material y la pieza, simula el terremoto y, si no resiste, recibe una recomendación según tu presupuesto.</p></div>
 
+<section class="tb on" id="t1">
+<div class="g2">
+<div class="card"><h3><span class="nb">1</span>Material y pieza</h3>
+<label>Material</label><select id="qm"></select>
+<div id="qx" class="f2" style="display:none"><div><label>Fluencia (MPa)</label><input type="number" id="cf" value="250"></div><div><label>Módulo E (GPa)</label><input type="number" id="ce" value="200"></div><div><label>Densidad (g/cm³)</label><input type="number" id="cd" value="7.85" step=".05"></div><div><label>Comportamiento</label><select id="cr"><option value="5">Dúctil</option><option value="3">Intermedio</option><option value="2">Frágil</option></select></div></div>
+<label>Forma de la sección</label><select id="qs"><option value="c">Circular (diámetro)</option><option value="q">Cuadrada (lado)</option><option value="r">Rectangular (base × altura)</option></select>
+<div class="f2"><div><label>Lado o diámetro (mm)</label><input type="number" id="q1" value="100"></div><div><label>Altura de sección (mm)</label><input type="number" id="q2" value="150"></div></div>
+<div class="f2"><div><label>Longitud (m)</label><input type="number" id="ql" value="2.6" step=".1"></div><div><label>Espesor de pared (mm)</label><input type="number" id="qt" value="4" step=".5"></div></div>
+<label><input type="checkbox" id="qh" checked> Sección hueca (tubo)</label></div>
+<div class="card"><h3><span class="nb">2</span>Obra y presupuesto</h3>
+<div class="f2"><div><label>Masa por pieza (kg)</label><input type="number" id="qw" value="1200"></div><div><label>Cantidad de piezas</label><input type="number" id="qn" value="4" min="1"></div></div>
+<label>Unión</label><select id="qk"><option value="0">Pórtico (empotrada abajo, viga arriba)</option><option value="1">Voladizo (libre arriba)</option></select>
+<label>Presupuesto total (S/) · 0 = sin límite</label><input type="number" id="qb" value="500">
+<label>Magnitud del sismo <b id="qmv"></b></label><input type="range" id="qMg" min="6" max="9" step=".1" value="8.5"></div></div>
+
+<div class="card"><h3><span class="nb">3</span>Simulación del sismo</h3><canvas id="qv" style="height:360px"></canvas>
+<div class="bt"><button class="btn pri" id="qgo">▶ Simular sismo</button><button class="btn" id="qrs">↺ Reiniciar</button><span class="note" id="qt2"></span></div>
+<div class="g2"><div class="v" id="qvd"></div><div class="ro" id="qgs"></div></div></div>
+
+<div class="g2"><div class="card"><h3><span class="nb">4</span>Magnitud que resiste cada material</h3><div id="qch"></div><p class="note">La línea amarilla marca el sismo elegido.</p></div>
+<div class="card"><h3><span class="nb">5</span>Recomendación de compra</h3><div id="qrec"></div></div></div>
+<div class="card"><h3>Comparación y costos (S/ por kg editable)</h3><div style="overflow-x:auto"><table id="qtb"></table></div>
+<p class="note">Modelo educativo simplificado, no reemplaza a un ingeniero civil. Aceleración 0,6 g en M8,5 (×2 por unidad de magnitud), espectro plano 2,5, reducción R por ductilidad, carga 1,25·peso, deriva máxima 1 %, flexo-compresión elástica en el eje débil. Precios estimados: edítalos con cotizaciones reales.</p></div>
+</section>
+
+<section class="tb" id="t0"><div class="grid">
+<div class="card"><h3>Probeta en la máquina</h3><canvas id="spec" style="height:360px"></canvas></div>
+<div><div class="card"><h3>Material</h3><div class="chips" id="chips"></div><div id="fi" class="note"></div>
+<div class="bt"><button class="btn pri" id="go">▶ Iniciar ensayo</button><button class="btn" id="rs">↺ Reiniciar</button></div>
+<div class="steps" id="steps"><span>Elástica</span><span>Fluencia</span><span>Estricción</span><span>Fractura</span></div><div id="ph" class="rc"></div>
+<div class="ro"><div><small>ESFUERZO σ (MPa)</small><b id="r1">0</b></div><div><small>DEFORMACIÓN ε (%)</small><b id="r2">0</b></div><div><small>MÓDULO E (GPa)</small><b id="r3">0</b></div><div><small>RESIST. ÚLTIMA (MPa)</small><b id="r4">—</b></div></div></div>
+<div class="card"><h3>Curva esfuerzo–deformación</h3><canvas id="chart" style="height:320px"></canvas></div></div></div>
+<p class="note">Datos: acero A-36, inoxidable 316 y aluminio 6061-T4 provienen de ensayos de tracción ASTM E8 (L. Ortiz y C. Rosas, UCSM Arequipa, 2021). Los demás materiales usan valores referenciales (Gr.60 ASTM A615, A572, 304, 6061-T6, titanio); la varilla informal es ilustrativa.</p>
+</section></div>
+
+<script>
+const $=id=>document.getElementById(id),C=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim(),f=(v,d=1)=>(+v).toLocaleString('es-PE',{maximumFractionDigits:d});
+const M=[['Acero A-36',7.85,200,527,250,33,5,4.5,'Ensayo UCSM, promedio de 3 probetas'],['Acero inoxidable 316',8,193,686,205,34,5,22,'Ensayo UCSM, 3 probetas'],['Aluminio 6061-T4',2.7,68.9,235,145,17,3,15,'Ensayo UCSM, 3 probetas'],['Varilla Grado 60',7.85,200,620,420,12,4,3.8,'Referencia ASTM A615'],['Varilla informal',7.85,195,360,240,6,2,3.2,'Ilustrativa, sin certificar'],['Acero A572 Gr.50',7.85,200,500,345,18,3,5.2,'Referencia'],['Acero inox. 304',8,193,562,205,40,5,18,'Referencia'],['Aluminio 6061-T6',2.7,68.9,300,240,12,3,17,'Referencia'],['Titanio Ti-6Al-4V',4.43,114,925,880,10,3,120,'Referencia'],['Personalizado',7.85,200,350,250,15,5,5,'Valores que tú ingresas']].map(a=>({n:a[0],d:a[1],E:a[2],s:a[3],y:a[4],e:a[5],R:a[6],p:a[7],src:a[8]}));
+function prep(m){m.ey=m.y/(10*m.E);m.eu=m.e*.8}M.forEach(prep);
+const sig=(m,x)=>x<=m.ey?10*m.E*x:x<=m.eu?m.y+(m.s-m.y)*Math.sqrt((x-m.ey)/(m.eu-m.ey)):m.s*(1-.3*((x-m.eu)/(m.e-m.eu))**2);
+M.forEach((m,i)=>$('qm').add(new Option(m.n,i)));
+function sz(cv){const d=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;cv.width=w*d;cv.height=h*d;const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);return[c,w,h]}
+const tk=v=>v>=100?Math.round(v):+v.toPrecision(2);
+/* ---------- Sismo ---------- */
+function G(){const s=$('qs').value,a=+$('q1').value,b=s=='r'?+$('q2').value:a,h=$('qh').checked,t=Math.max(.1,Math.min(+$('qt').value,Math.min(a,b)/2-.1)),L=+$('ql').value*1e3;let A,I,c;
+ if(s=='c'){const i=h?a-2*t:0;A=Math.PI/4*(a*a-i*i);I=Math.PI/64*(a**4-i**4);c=a/2}
+ else{const w=Math.min(a,b),H=Math.max(a,b),wi=h?w-2*t:0,Hi=h?H-2*t:0;A=w*H-wi*Hi;I=(H*w**3-Hi*wi**3)/12;c=w/2}
+ return{A,I,S:I/c,L}}
+function rat(m,g,pga){const W=+$('qw').value*9.81*1.25,V=2.5*pga*W/m.R,k=$('qk').value=='0',sg=W/g.A+V*g.L/(k?2:1)/g.S,dr=V*g.L**2/((k?12:3)*m.E*1000*g.I)/.01;return{s:sg/m.y,d:dr,r:Math.max(sg/m.y,dr)}}
+function magRes(m,g){if(rat(m,g,0).r>1)return 0;let lo=0,hi=3;for(let i=0;i<30;i++){const x=(lo+hi)/2;rat(m,g,x).r<=1?lo=x:hi=x}return lo>=1.5?9.9:Math.max(0,8.5+Math.log2(lo/.6))}
+function accel(Mg){const dur=Math.round(20+(Mg-5)*12),dt=.05,N=Math.floor(dur/dt);let s=11;const r=()=>(s=s*16807%2147483647)/2147483647,cp=[];for(let i=0;i<14;i++)cp.push([.5+r()*3.5,r()*6.283,.4+r()]);
+ const a=[];let mx=0;for(let i=0;i<N;i++){const x=i*dt/dur,en=x<.15?(x/.15)**2:x<.55?1:Math.exp(-(x-.55)*5);let v=0;for(const q of cp)v+=q[2]*Math.sin(6.283*q[0]*i*dt+q[1]);v*=en;a.push(v);mx=Math.max(mx,Math.abs(v))}
+ return{a:a.map(v=>v/mx),dt,dur}}
+const mr=v=>v>=9.9?'> 9,8':v<5?'< 5,0':f(v,1);
+let Q={},T=0,raf=0;
+function calc(){const idx=+$('qm').value,m=M[idx];if(idx==9){m.y=+$('cf').value;m.E=+$('ce').value;m.d=+$('cd').value;m.R=+$('cr').value;m.s=m.y*1.4;prep(m)}
+ $('qx').style.display=idx==9?'grid':'none';$('q2').parentNode.style.opacity=$('qs').value=='r'?1:.4;
+ const Mg=+$('qMg').value,g=G(),n=Math.max(1,+$('qn').value),B=+$('qb').value,pga=Math.min(1.5,.6*2**(Mg-8.5));$('qmv').textContent='M'+f(Mg,1).replace('.',',');
+ const L=M.map(x=>{const mass=g.A*g.L*x.d/1e6*n;return{m:x,mr:magRes(x,g),mass,cost:mass*x.p}});
+ const ac=accel(Mg),sel=L[idx],pk=rat(m,g,pga),rt=ac.a.map(v=>rat(m,g,pga*Math.abs(v))),tc=rt.findIndex(x=>x.r>=1.5);
+ Q={Mg,g,n,B,pga,L,ac,sel,m,pk,rt,tc:tc<0?null:tc*ac.dt,st:pk.r<=1?0:pk.r<1.5?1:2};T=0;draw();rep()}
+function rep(){const{sel,pk,st,Mg,L,B,m}=Q,S=['<span class="ok">✔ Resiste el sismo</span>','<span class="wn">⚠ No cumple: daño plástico y deriva excesiva</span>','<span class="no">✖ Colapso</span>'][st];
+ $('qvd').innerHTML=m.n+': '+S;
+ $('qgs').innerHTML=[['Aceleración',f(Q.pga,2)+' g'],['Demanda / capacidad',f(pk.r,2)],['Tensión / fluencia',f(pk.s,2)],['Deriva / límite',f(pk.d,2)],['Resiste hasta',mr(sel.mr)],['Costo total','S/ '+f(sel.cost,0)]].map(k=>'<div><small>'+k[0]+'</small><b>'+k[1]+'</b></div>').join('');
+ $('qch').innerHTML=L.map(x=>'<div class="row"><span class="nm">'+x.m.n+'</span><div class="bar"><i style="width:'+Math.max(2,(Math.min(x.mr,9.9)-5)/4.9*100)+'%;background:'+(x.mr>=Mg?C('--ok'):C('--bad'))+'"></i><u style="left:'+(Mg-5)/4.9*100+'%"></u></div><span class="vl">'+mr(x.mr)+'</span></div>').join('');
+ const ok=L.filter(x=>x.mr>=Mg),inb=ok.filter(x=>!B||x.cost<=B).sort((a,b)=>a.cost-b.cost),all=ok.sort((a,b)=>a.cost-b.cost),line=(x,t)=>'<div class="rc">'+t+' <b>'+x.m.n+'</b> · S/ '+f(x.cost,0)+' en total · '+f(x.mass,0)+' kg · resiste hasta M'+mr(x.mr)+'</div>';
+ let h='';
+ if(sel.mr>=Mg)h+='<div class="rc">Tu material <b>'+m.n+'</b> resiste M'+f(Mg,1)+'. '+(B&&sel.cost>B?'Pero cuesta S/ '+f(sel.cost-B,0)+' más que tu presupuesto.':'Está dentro de tu presupuesto.')+'</div>';
+ else h+='<div class="rc bad">'+m.n+' no resiste M'+f(Mg,1)+' con esta pieza (aguanta hasta M'+mr(sel.mr)+').</div>';
+ if(inb.length)h+=inb.slice(0,3).map((x,i)=>line(x,i?'Alternativa:':'Recomendado por precio:')).join('');
+ else if(all.length)h+=line(all[0],'Resiste pero no entra en S/ '+f(B,0)+'. La más barata:')+'<div class="rc">Te faltan S/ '+f(all[0].cost-B,0)+'. También puedes reducir la masa o el largo de la pieza.</div>';
+ else h+='<div class="rc bad">Ningún material resiste con esta sección. Aumenta el diámetro, el espesor de pared o usa más apoyos (menor longitud).</div>';
+ $('qrec').innerHTML=h;
+ $('qtb').innerHTML='<tr><th>Material</th><th>Masa (kg)</th><th>S/ por kg</th><th>Costo (S/)</th><th>Resiste hasta</th><th>M'+f(Mg,1)+'</th></tr>'+Q.L.map((x,i)=>'<tr><td>'+x.m.n+'</td><td>'+f(x.mass,0)+'</td><td><input type="number" step=".5" data-i="'+i+'" value="'+x.m.p+'"></td><td>'+f(x.cost,0)+'</td><td>'+mr(x.mr)+'</td><td class="'+(x.mr>=Mg?'ok':'no')+'">'+(x.mr>=Mg?'Resiste':'Falla')+'</td></tr>').join('')}
+function draw(){const[c,w,h]=sz($('qv')),{ac,g,n,rt}=Q,i=Math.min(rt.length-1,T/ac.dt|0),a=ac.a[i],r=rt[i].r,col=Q.tc!=null&&T>=Q.tc?C('--bad'):r>1?C('--bad'):r>.7?C('--a2'):C('--a'),gy=h-86,Lp=gy-60,nv=Math.min(n,4),sp=Math.min(80,(w-80)/nv),k=$('qk').value=='0';
+ const dx=Math.sign(a)*Math.min(4*Math.abs(a)+rt[i].d*.01*Lp*10,Lp*.5),col2=Q.tc!=null&&T>=Q.tc,p=col2?Math.min(1,(T-Q.tc)/2):0;
+ c.fillStyle=C('--s2');c.fillRect(0,gy,w,10);
+ c.save();c.translate(w/2+a*6,gy);if(col2)c.rotate(p*1.4*(a>=0?1:-1));c.lineCap='round';c.strokeStyle=col;c.fillStyle=col;c.lineWidth=Math.max(4,Math.min(12,g.A/200));
+ const xs=[...Array(nv)].map((_,j)=>(j-(nv-1)/2)*sp),d=col2?0:dx;
+ xs.forEach(x=>{c.beginPath();c.moveTo(x,0);c.bezierCurveTo(x,-Lp*(k?.4:.55),x+d*(k?1:.35),-Lp*(k?.6:.9),x+d,-Lp);c.stroke();c.fillRect(x+d-14,-Lp-16,28,16)});
+ if(k){c.lineWidth=6;c.beginPath();c.moveTo(xs[0]+d-14,-Lp-20);c.lineTo(xs[nv-1]+d+14,-Lp-20);c.stroke()}
+ c.restore();
+ const y0=h-70,hh=60;c.strokeStyle=C('--ln');c.strokeRect(0,y0,w,hh);c.strokeStyle=C('--m');c.beginPath();ac.a.forEach((v,j)=>c[j?'lineTo':'moveTo'](j/ac.a.length*w,y0+hh/2-v*hh*.45));c.stroke();c.strokeStyle=C('--a2');c.beginPath();c.moveTo(T/ac.dur*w,y0);c.lineTo(T/ac.dur*w,y0+hh);c.stroke();
+ $('qt2').textContent='t = '+f(T,1)+' s de '+ac.dur+' s'}
+function stopQ(){cancelAnimationFrame(raf);$('qgo').textContent='▶ Simular sismo'}
+$('qgo').onclick=()=>{if($('qgo').textContent[0]=='⏸'){stopQ();return}if(T>=Q.ac.dur)T=0;const t0=performance.now(),f0=T;$('qgo').textContent='⏸ Pausar';const st=now=>{T=Math.min(Q.ac.dur,f0+(now-t0)/1000*5);draw();T<Q.ac.dur?raf=requestAnimationFrame(st):stopQ()};raf=requestAnimationFrame(st)};
+$('qrs').onclick=()=>{stopQ();T=0;draw()};
+document.querySelectorAll('#t1 input,#t1 select').forEach(e=>e.addEventListener('input',()=>{if(e.dataset.i)return;stopQ();calc()}));
+$('qtb').onchange=e=>{const i=e.target.dataset.i;if(i!=null){M[i].p=+e.target.value;calc()}};
+/* ---------- Tracción ---------- */
+const P={i:0,eps:0,run:false,br:false};let mx=0;
+$('chips').innerHTML=M.slice(0,9).map((m,i)=>'<span class="chip" data-i="'+i+'">'+m.n+'</span>').join('');
+function pick(i){P.i=i;P.eps=0;P.br=false;P.run=false;mx=0;$('go').textContent='▶ Iniciar ensayo';document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',+c.dataset.i==i));const m=M[i];$('fi').innerHTML='<b style="color:var(--t)">'+m.n+'</b><br>ρ '+m.d+' g/cm³ · E '+m.E+' GPa · σ máx '+m.s+' MPa · alargamiento '+m.e+' %<br>'+m.src}
+$('chips').onclick=e=>{if(e.target.dataset.i)pick(+e.target.dataset.i)};
+$('go').onclick=()=>{if(P.br)pick(P.i);P.run=!P.run;$('go').textContent=P.run?'⏸ Pausar':'▶ Continuar'};$('rs').onclick=()=>pick(P.i);
+const PH=['Zona elástica: el material se estira y recupera su forma. La pendiente es E.','Fluencia y endurecimiento: la deformación ya es permanente y sigue resistiendo hasta su máximo.','Estricción: la probeta se afina en una zona y la fuerza empieza a bajar.','Fractura: ya tenemos la resistencia última. Úsala en el simulador de sismo.'];
+function spec(m){const[c,w,h]=sz($('spec')),e=P.eps,k=e/m.e,L=170*(1+k*.5),top=70,r=Math.min(1,sig(m,e)/m.s),cx=w/2,col='hsl('+(185-160*r)+',78%,58%)',dy=P.br?18:0;
+ const hw=t=>16*(1-.15*k)-((e>m.eu)?10*Math.exp(-(((t-.5)/.1)**2))*Math.min(1,(e-m.eu)/(m.e-m.eu)):0);
+ const poly=(a,b,d)=>{c.beginPath();for(let t=a;t<=b+1e-6;t+=.02)c.lineTo(cx-hw(t),top+t*L+d);for(let t=b;t>=a-1e-6;t-=.02)c.lineTo(cx+hw(t),top+t*L+d);c.closePath();c.fill()};
+ c.fillStyle=col;if(P.br){poly(0,.5,-dy/2);poly(.5,1,dy/2)}else poly(0,1,0);
+ c.fillStyle=C('--m');c.fillRect(cx-45,top-36-(P.br?dy/2:0),90,36);c.fillRect(cx-45,top+L+(P.br?dy/2:0),90,36)}
+function chart(m){const[c,w,h]=sz($('chart')),l=56,rr=14,t=14,b=36,xm=m.e*1.15,ym=Math.max(m.s*1.2,420),X=v=>l+(w-l-rr)*v/xm,Y=v=>h-b-(h-t-b)*v/ym;c.font='11px Inter,sans-serif';c.lineWidth=1;
+ for(let i=0;i<=5;i++){c.strokeStyle=C('--ln');c.beginPath();c.moveTo(l,Y(ym*i/5));c.lineTo(w-rr,Y(ym*i/5));c.moveTo(X(xm*i/5),t);c.lineTo(X(xm*i/5),h-b);c.stroke();c.fillStyle=C('--m');c.textAlign='right';c.fillText(tk(ym*i/5),l-6,Y(ym*i/5)+4);c.textAlign='center';c.fillText(tk(xm*i/5),X(xm*i/5),h-b+16)}
+ c.fillText('ε (%)',w/2,h-4);c.save();c.translate(12,h/2);c.rotate(-Math.PI/2);c.fillText('σ (MPa)',0,0);c.restore();
+ c.setLineDash([8,5]);c.strokeStyle=C('--ok');c.beginPath();c.moveTo(l,Y(400));c.lineTo(w-rr,Y(400));c.stroke();c.setLineDash([]);c.fillStyle=C('--ok');c.textAlign='right';c.fillText('Meta 400 MPa',w-rr-4,Y(400)-5);
+ const path=(to,col,dash)=>{c.beginPath();c.setLineDash(dash);for(let x=0;x<=to;x+=m.e/300)c[x?'lineTo':'moveTo'](X(x),Y(sig(m,x)));c.strokeStyle=col;c.lineWidth=2;c.stroke();c.setLineDash([])};
+ path(m.e,C('--m'),[3,5]);path(P.eps,C('--a'),[]);c.fillStyle=C('--a2');c.beginPath();c.arc(X(P.eps),Y(sig(m,P.eps)),5,0,7);c.fill()}
+function tens(){if($('t0').classList.contains('on')){const m=M[P.i];if(P.run&&!P.br){P.eps=Math.min(m.e,P.eps+m.e/260);if(P.eps>=m.e){P.br=true;P.run=false;$('go').textContent='↺ Repetir'}}
+ const s=sig(m,P.eps);mx=Math.max(mx,s);const ph=P.br?3:P.eps<=m.ey?0:P.eps<=m.eu?1:2;
+ [...$('steps').children].forEach((x,i)=>x.classList.toggle('on',i==ph));$('ph').textContent=PH[ph];
+ $('r1').textContent=f(s,0);$('r2').textContent=f(P.eps,2);$('r3').textContent=f(m.E,1);$('r4').innerHTML=P.br?f(m.s,0)+(m.s>=400?' <span class="ok">✔</span>':' <span class="no">✖</span>'):'—';
+ spec(m);chart(m)}requestAnimationFrame(tens)}
+function loop(){tens();requestAnimationFrame(loop)}
+function showTab(t){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));$('t1').classList.toggle('on',t==1);$('t0').classList.toggle('on',t==0);if(t==1)draw()}
+$('tabs').onclick=e=>{if(e.target.dataset.t!=null)showTab(+e.target.dataset.t)};
+addEventListener('resize',()=>{draw()});
+pick(0);calc();
+(function l(){tens();requestAnimationFrame(l)})();
+</script></body></html>
